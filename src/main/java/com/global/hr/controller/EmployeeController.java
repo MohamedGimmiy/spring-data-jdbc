@@ -48,4 +48,10 @@ public class EmployeeController {
 		return employeeRepo.findBysalaryAndName(name,salary);
 	}
 	
+	@GetMapping("/delete/{id}")
+	public void deleteEmp(@PathVariable("id") Long id) {
+		System.out.println("Deleted");
+		 employeeRepo.deleteById(id);
+	}
+	
 }
