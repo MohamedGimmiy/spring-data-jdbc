@@ -2,6 +2,7 @@ package com.global.hr.reposatory;
 
 import java.util.List;
 
+import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -20,5 +21,9 @@ public interface EmployeeRepo extends CrudRepository<Employee, Long> {
 	@Query(value = "SELECT * FROM EMPLOYEE WHERE SALARY >= :EMPSALARY AND NAME LIKE :EMPNAME")
 	List<Employee> findBysalaryAndName(@Param("EMPNAME") String name, 
 			@Param("EMPSALARY") Double salary);
+	
+	@Modifying
+	@Query("UPDATE EMPLOYEE SET SALARY = :salary WHERE ID = :id")
+	int updateSalary(Double salary, Long id);
 
 }
